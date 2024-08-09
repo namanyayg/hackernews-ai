@@ -43,7 +43,7 @@ export default function Leaderboard() {
     );
   }
 
-  if (!leaderboardData || (leaderboardData.recent.length === 0 && leaderboardData.top.length === 0)) {
+  if (!leaderboardData || (leaderboardData?.recent?.length === 0 && leaderboardData?.top?.length === 0)) {
     return null;
   }
 
@@ -51,7 +51,7 @@ export default function Leaderboard() {
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
       <h2 className="text-3xl font-semibold text-center mb-12 text-orange-600">Roast Leaderboard</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
-        {leaderboardData.recent.length > 0 && (
+        {leaderboardData?.recent?.length > 0 && (
           <div>
             <h3 className="text-2xl font-semibold mb-4 text-orange-500">Recent Roasts</h3>
             <table className="w-full">
@@ -62,7 +62,7 @@ export default function Leaderboard() {
                 </tr>
               </thead>
               <tbody>
-                {leaderboardData.recent.map((entry) => (
+                {leaderboardData?.recent?.map((entry) => (
                   <tr key={`recent-${entry.id}`} className="border-b border-orange-100">
                     <td className="py-2">
                       <Link href={`/u/${entry.username}`} className="hover:text-orange-500 transition-colors">
@@ -76,7 +76,7 @@ export default function Leaderboard() {
             </table>
           </div>
         )}
-        {leaderboardData.top.length > 0 && (
+        {leaderboardData?.top?.length > 0 && (
           <div>
             <h3 className="text-2xl font-semibold mb-4 text-orange-500">Highest Karma</h3>
             <table className="w-full">
@@ -87,7 +87,7 @@ export default function Leaderboard() {
                 </tr>
               </thead>
               <tbody>
-                {leaderboardData.top.map((entry) => (
+                {leaderboardData?.top?.map((entry) => (
                   <tr key={`top-${entry.id}`} className="border-b border-orange-100">
                     <td className="py-2">
                       <Link href={`/u/${entry.username}`} className="hover:text-orange-500 transition-colors">
