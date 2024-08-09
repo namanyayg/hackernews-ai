@@ -67,7 +67,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 text-orange-600">{user.username}</h3>
                 <p className="text-gray-600 mb-4">{user.about}</p>
                 <Link href={`/u/${user.username}`} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded inline-block">
-                  View their roast
+                  View roast
                 </Link>
               </div>
             ))}
