@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import RoastClientSide from '@/components/RoastClientSide';
+import Link from 'next/link';
+import Roast from '@/components/Roast';
 
 interface UserData {
   username: string;
@@ -48,15 +49,25 @@ export default async function UserRoast({ params }: { params: { username: string
 
   return (
     <main className="bg-white text-gray-800 p-8 pb-8">
-      <section className="max-w-4xl mx-auto">
+      <div className="flex justify-center mb-8">
+        <Link href="/" className="bg-white hover:bg-orange-100 text-orange-500 font-bold py-2 px-4 rounded border border-orange-500">&larr; Back to Home</Link>
+      </div>
+      <section className="max-w-4xl mx-auto mb-8">
         <div className="text-center">
           <h1 className="text-sm text-gray-500 font-serif uppercase tracking-widest mb-2">THE ROAST OF</h1>
           <h2 className="text-3xl font-bold mb-4">{userData.username}</h2>
-          <p className="text-sm text-gray-60 mb-4">Joined: {new Date(userData.created).toLocaleDateString()}</p>
-          <div className="text-gray-600 mb-8" dangerouslySetInnerHTML={{ __html: userData.about || '' }} />
+          <p className="text-sm text-gray-600 mb-2">Joined: {new Date(userData.created).toLocaleDateString()}</p>
+          <p className="text-sm text-gray-600 mb-2">{userData.karma} karma</p>
+          <div className="text-gray-600 mb-2" dangerouslySetInnerHTML={{ __html: userData.about || '' }} />
+          <Link href={`https://news.ycombinator.com/user?id=${userData.username}`} className="text-gray-500 hover:text-gray-700" target="_blank" rel="noopener noreferrer">
+            View profile on HackerNews &rarr;
+          </Link>
         </div>
       </section>
-      <RoastClientSide username={userData.username} />
+      <Roast username={userData.username} />
+      <div className="flex justify-center">
+        <Link href="/" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">&larr; Back to Home</Link>
+      </div>
     </main>
   );
 }

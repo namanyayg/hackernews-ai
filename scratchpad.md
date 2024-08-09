@@ -1,1 +1,0 @@
-* Create share buttons with image generation

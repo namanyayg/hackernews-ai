@@ -23,7 +23,7 @@ const fetchAndPollData = async (username: string, setUserData: (data: UserData) 
         const data = await response.json();
         setUserData(data);
         if (!data.roastText || !data.strengthsText || !data.weaknessesText) {
-          if (retryCount < 1) {
+          if (retryCount < 4) {
             setTimeout(() => fetchUserData(retryCount + 1), 5000);
           } else {
             setIsLoading(false);
@@ -67,10 +67,12 @@ const ShareButton = ({ text, color, elementId }: { text: string; color: 'green' 
 
     return canvas.toDataURL('image/png');
   };
-
   const handleTwitterShare = () => {
     const content = document.getElementById(elementId)?.querySelector('p')?.textContent;
-    const trimmedContent = content ? content.substring(0, 150) + '...' : '';
+    const trimmedContent = content ? content.split(/\s+/).reduce((acc, word) => {
+      if (acc.length + word.length + 1 <= 140) return acc + ' ' + word;
+      return acc;
+    }, '').trim() + '...' : '';
     const twitterText = `${text}\n\n"${trimmedContent}"`;
     const twitterUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(twitterText)}`;
     window.open(twitterUrl, '_blank');
@@ -155,8 +157,8 @@ export default function RoastClientSide({ username }: { username: string }) {
   return (
     <>
       {userData.roastText ? (
-        <div id="roast-content" className="bg-red-50 border border-red-300 text-red-900 p-6 rounded relative mb-8">
-          <p className="mb-2">{userData.roastText}</p>
+        <div id="roast-content" className="bg-red-50 border border-red-300 text-red-900 p-6 rounded relative mb-8 max-w-[60em] mx-auto">
+          <div className="[&>p]:mb-4 text-lg" dangerouslySetInnerHTML={{ __html: userData.roastText }} />
           <ShareButton text={`The roast of ${userData.username} from HackerNews (https://roastmyhn.nmn.gl/u/${userData.username})`} color="red" elementId="roast-content" />
         </div>
       ) : (
@@ -164,11 +166,11 @@ export default function RoastClientSide({ username }: { username: string }) {
       )}
       <div className="flex flex-wrap -mx-4">
         <div className="w-full md:w-1/2 px-4 mb-4">
-          <div id="strengths-content" className="bg-green-50 border border-green-300 text-green-800 p-6 rounded relative h-full flex flex-col">
+          <div id="strengths-content" className="bg-green-50 border border-green-300 text-green-800 p-6 rounded relative h-full flex flex-col max-w-[60em] mx-auto">
             <h3 className="font-serif text-2xl mb-2">Strengths</h3>
             {userData.strengthsText ? (
               <>
-                <p className="mb-2 flex-grow">{userData.strengthsText}</p>
+                <div className="[&>p]:mb-4 flex-grow text-lg" dangerouslySetInnerHTML={{ __html: userData.strengthsText }} />
                 <ShareButton text={`The strengths of ${userData.username} from HackerNews (https://roastmyhn.nmn.gl/u/${userData.username})`} color="green" elementId="strengths-content" />
               </>
             ) : (
@@ -177,11 +179,11 @@ export default function RoastClientSide({ username }: { username: string }) {
           </div>
         </div>
         <div className="w-full md:w-1/2 px-4 mb-4">
-          <div id="weaknesses-content" className="bg-red-100 border border-red-400 text-red-800 px-4 py-3 rounded relative h-full flex flex-col">
+          <div id="weaknesses-content" className="bg-red-100 border border-red-400 text-red-800 px-4 py-3 rounded relative h-full flex flex-col max-w-[60em] mx-auto">
             <h3 className="font-serif text-2xl mb-2">Weaknesses</h3>
             {userData.weaknessesText ? (
               <>
-                <p className="mb-2 flex-grow">{userData.weaknessesText}</p>
+                <div className="[&>p]:mb-4 flex-grow text-lg" dangerouslySetInnerHTML={{ __html: userData.weaknessesText }} />
                 <ShareButton text={`The weaknesses of ${userData.username} from HackerNews (https://roastmyhn.nmn.gl/u/${userData.username})`} color="red" elementId="weaknesses-content" />
               </>
             ) : (

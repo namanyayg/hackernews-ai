@@ -31,11 +31,15 @@ export default async function Image({ params }: { params: { username: string } }
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ fontSize: 30, opacity: 0.7 }}>THE ROAST OF</div>
-          <div style={{ fontWeight: 'bold' }}>{userData.id}</div>
-          <div style={{ fontSize: 30, marginTop: 20 }}>Karma: {userData.karma}</div>
-          <div style={{ fontSize: 30, marginTop: 20 }}>{userData.about}</div>
-          <div style={{ fontSize: 20, marginTop: 40, opacity: 0.7 }}>Roasted using https://roastmyhn.nmn.gl/</div>
+          <div style={{ display: 'flex', fontSize: 30, opacity: 0.7 }}>THE ROAST OF</div>
+          <div style={{ display: 'flex', fontWeight: 'bold' }}>{userData.id}</div>
+          <div style={{ display: 'flex', fontSize: 30, marginTop: 20 }}>Karma: {userData.karma}</div>
+          {userData.about && (
+            <div style={{ display: 'flex', fontSize: 30, marginTop: 20 }}>
+              <span>{userData.about}</span>
+            </div>
+          )}
+          <div style={{ display: 'flex', fontSize: 20, marginTop: 40, opacity: 0.7 }}>Roasted using https://roastmyhn.nmn.gl/</div>
         </div>
       </div>
     ),

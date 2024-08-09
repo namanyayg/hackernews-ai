@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 import Leaderboard from "@/components/Leaderboard";
 
@@ -37,15 +38,15 @@ export default function Home() {
           <div className="max-w-3xl w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
             <div>
               <h3 className="text-xl font-semibold mb-2 text-center">Step 1</h3>
-              <p>The AI will fetch your HN profile, recent posts, and comments</p>
+              <p className="text-center md:text-left">The AI will fetch your HN profile, recent posts, and comments</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2 text-center">Step 2</h3>
-              <p>AI analyzes your description, karma, profile, and submissions</p>
+              <p className="text-center md:text-left">AI analyzes your description, karma, profile, and submissions</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2 text-center">Step 3</h3>
-              <p>AI will prepare your roast and display it on a webpage</p>
+              <p className="text-center md:text-left">AI will prepare your roast and display it on a webpage</p>
             </div>
           </div>
         </div>
@@ -65,9 +66,9 @@ export default function Home() {
               <div key={index} className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-semibold mb-2 text-orange-600">{user.username}</h3>
                 <p className="text-gray-600 mb-4">{user.about}</p>
-                <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
+                <Link href={`/u/${user.username}`} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded inline-block">
                   View their roast
-                </button>
+                </Link>
               </div>
             ))}
           </div>

@@ -57,7 +57,6 @@ const fetchUser = async (username: string) => {
       submissions: true,
     },
   })
-  console.log(userData)
   return userData
 }
 
@@ -89,17 +88,15 @@ const roastUserUsingAi = async (userData: User & { submissions: Submission[] }) 
     ?.map((comment: Submission) => {
       return `comment: ${comment.text?.substring(0, 200)}`
     })
-  console.log('ROASTING')
-  console.log(userData, posts, comments)
-  if (!posts.length || !comments.length) {
+  if (!posts.length && !comments.length) {
     console.log('ERROR: No posts or comments found for user', userData.username)
     return userData;
   }
   const prompt = `
   Generate a strong, harsh, realistic, and mind-blowing roast for the user with details given below.
-  Make sure the roast content is AT LEAST 4 paragraphs long, multiple lines and long roast is needed. Separate each paragraph with a \\n symbol.
-  Make sure the roast is specific to the user and their posts and comments.
   Give your reply in a JSON object with 3 properties: roastText, strengthsText, weaknessesText.
+  Make sure each property of the result (roast, strengths, weaknesses) is AT LEAST 4 paragraphs long, multiple lines and long roast is needed. Each paragraph should be in it's own <p> </p> tag, but all contained within the same string. Make sure you at least include 4 paragraphs or else I'll be fired from my job.
+  Make sure the roast is specific to the user and their posts and comments.
   User details:
   username: ${userData.username}
   about: ${userData.about}
@@ -126,6 +123,7 @@ const roastUserUsingAi = async (userData: User & { submissions: Submission[] }) 
         roastText: roastData.roastText,
         strengthsText: roastData.strengthsText,
         weaknessesText: roastData.weaknessesText,
+        isCurrentlyProcessing: false,
       }
     })
     return userData

@@ -31,8 +31,8 @@ export default function RootLayout({
 
         {/* About the Creator Section */}
         <section className="py-20 bg-orange-50 text-gray-600">
-          <h1 className="text-sm text-center text-gray-300 font-serif uppercase tracking-widest mb-6">About the Creator</h1>
-          <div className="text-center max-w-7xl mx-auto">
+          <h1 className="text-sm text-center text-gray-300 font-serif uppercase tracking-widest mb-6 px-4">About the Creator</h1>
+          <div className="text-center max-w-7xl mx-auto px-4">
             <a className="flex items-center justify-center mb-6" href="https://x.com/NamanyayG" target="_blank" rel="noopener noreferrer">
               <div className="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
                 <img src="https://pbs.twimg.com/profile_images/1808192564257841152/6S6mwLb4_400x400.jpg" alt="NamanyayG" width={48} height={48} />
