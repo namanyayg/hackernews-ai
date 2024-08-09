@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 interface LeaderboardEntry {
   id: string;
@@ -63,7 +64,11 @@ export default function Leaderboard() {
               <tbody>
                 {leaderboardData.recent.map((entry) => (
                   <tr key={`recent-${entry.id}`} className="border-b border-orange-100">
-                    <td className="py-2">{entry.username}</td>
+                    <td className="py-2">
+                      <Link href={`/u/${entry.username}`} className="hover:text-orange-500 transition-colors">
+                        {entry.username}
+                      </Link>
+                    </td>
                     <td className="text-right py-2">{entry.karma}</td>
                   </tr>
                 ))}
@@ -84,7 +89,11 @@ export default function Leaderboard() {
               <tbody>
                 {leaderboardData.top.map((entry) => (
                   <tr key={`top-${entry.id}`} className="border-b border-orange-100">
-                    <td className="py-2">{entry.username}</td>
+                    <td className="py-2">
+                      <Link href={`/u/${entry.username}`} className="hover:text-orange-500 transition-colors">
+                        {entry.username}
+                      </Link>
+                    </td>
                     <td className="text-right py-2">{entry.karma}</td>
                   </tr>
                 ))}

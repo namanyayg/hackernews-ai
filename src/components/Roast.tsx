@@ -103,6 +103,7 @@ const ShareButton = ({ text, color, elementId }: { text: string; color: 'green' 
       >
         Share on X
       </button>
+      {/* @ts-ignore */}
       {typeof navigator !== 'undefined' && navigator.share && (
         <button
           className={`${color === 'green' ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600'} text-white font-bold py-2 px-4 rounded`}

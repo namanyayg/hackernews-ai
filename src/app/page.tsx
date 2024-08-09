@@ -59,9 +59,9 @@ export default function Home() {
           <p className="text-xl text-center mb-12">See some roasts below</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { username: "pg", about: "YC founder" },
-              { username: "patio11", about: "Indie hacker" },
-              { username: "tptacek", about: "Security expert" }
+              { username: "pg", about: "Bug fixer" },
+              { username: "patio11", about: "I work for the Internet" },
+              { username: "tptacek", about: "Helu! I'm Thomas" }
             ].map((user, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-semibold mb-2 text-orange-600">{user.username}</h3>
