@@ -54,8 +54,8 @@ export default function Home() {
       {/* Example Roasts Section */}
       <section className="py-20 bg-orange-50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-semibold text-center mb-12 text-orange-600">Don&apos;t want to be roasted just yet?</h2>
-          <p className="text-xl text-center mb-12">See famous roasts below</p>
+          <h2 className="text-3xl font-semibold text-center mb-4 text-orange-600">Don&apos;t want to be roasted just yet?</h2>
+          <p className="text-xl text-center mb-12">See some roasts below</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { username: "pg", about: "YC founder" },
