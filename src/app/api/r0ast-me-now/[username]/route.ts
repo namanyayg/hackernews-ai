@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { revalidatePath } from 'next/cache'
 import OpenAI from 'openai'
 import prisma from '@/app/lib/prisma'
 
@@ -126,6 +127,8 @@ const roastUserUsingAi = async (userData: User & { submissions: Submission[] }) 
         isCurrentlyProcessing: false,
       }
     })
+    revalidatePath(`/api/r0ast-me-now/${userData.username}`)
+    revalidatePath(`/u/${userData.username}`)
     return userData
   } catch (error) {
     console.error(error);
