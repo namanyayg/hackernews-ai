@@ -79,6 +79,16 @@ const roastUserUsingAi = async (userData: User & { submissions: Submission[] }) 
       isCurrentlyProcessing: true,
     }
   })
+  setTimeout(async () => {
+    await prisma.user.update({
+      where: {
+        username: userData.username,
+      },
+      data: {
+        isCurrentlyProcessing: false,
+      }
+    })
+  }, 5000)
   const posts = userData.submissions
     ?.filter((post: Submission) => post.type === 'story' && post.title && post.score)
     ?.map((post: Submission) => {
