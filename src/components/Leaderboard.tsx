@@ -15,6 +15,8 @@ interface LeaderboardData {
   top: LeaderboardEntry[];
 }
 
+const excludedUsernames = ["pg", "patio11", "tptacek"];
+
 export default function Leaderboard() {
   const [leaderboardData, setLeaderboardData] = useState<LeaderboardData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +26,12 @@ export default function Leaderboard() {
       try {
         const response = await fetch('/api/leaderboard');
         const data = await response.json();
-        setLeaderboardData(data);
+        // Filter out excluded usernames
+        const filteredData = {
+          recent: data.recent.filter((entry: LeaderboardEntry) => !excludedUsernames.includes(entry.username)),
+          top: data.top.filter((entry: LeaderboardEntry) => !excludedUsernames.includes(entry.username))
+        };
+        setLeaderboardData(filteredData);
       } catch (error) {
         console.error('Error fetching leaderboard data:', error);
       } finally {
