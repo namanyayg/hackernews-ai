@@ -19,6 +19,7 @@ export default async function Image({ params }: { params: { username: string } }
       <div
         style={{
           fontSize: 60,
+          padding: 20,
           color: 'black',
           background: 'white',
           width: '100%',
@@ -36,7 +37,7 @@ export default async function Image({ params }: { params: { username: string } }
           <div style={{ display: 'flex', fontSize: 30, marginTop: 20 }}>Karma: {userData.karma}</div>
           {userData.about && (
             <div style={{ display: 'flex', fontSize: 30, marginTop: 20 }}>
-              <span>{userData.about}</span>
+              <span dangerouslySetInnerHTML={{ __html: userData.about }} />
             </div>
           )}
           <div style={{ display: 'flex', fontSize: 20, marginTop: 40, opacity: 0.7 }}>Roasted using https://roastmyhn.nmn.gl/</div>
