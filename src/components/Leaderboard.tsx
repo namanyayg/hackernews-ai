@@ -24,7 +24,7 @@ export default function Leaderboard() {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response = await fetch('/api/leaderboard', { next: { revalidate: 1800 } });
+        const response = await fetch('/api/leaderboard', { next: { revalidate: 300 } });
         const data = await response.json();
         // Filter out excluded usernames
         const filteredData = {
