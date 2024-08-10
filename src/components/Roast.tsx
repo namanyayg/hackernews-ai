@@ -19,7 +19,11 @@ interface UserData {
 const fetchAndPollData = async (username: string, setUserData: (data: UserData) => void, setIsLoading: (isLoading: boolean) => void) => {
     const fetchUserData = async (retryCount = 0) => {
       try {
-        const response = await fetch(`/api/r0ast-me-now/${username}`, { next: { revalidate: 1 } });
+        let opts = {}
+        if (retryCount > 2) {
+          opts = { next: { revalidate: 1 } }
+        }
+        const response = await fetch(`/api/r0ast-me-now/${username}`, opts);
         const data = await response.json();
         setUserData(data);
         if (!data.roastText || !data.strengthsText || !data.weaknessesText) {
