@@ -28,7 +28,7 @@ async function getUserData(username: string): Promise<UserData | null> {
 }
 
 export async function generateMetadata({ params }: { params: { username: string } }): Promise<Metadata> {
-  const userData = await getUserData(params.username);
+  const userData = await getUserData(params.username.toLowerCase());
   if (!userData) return { title: 'User Not Found' };
 
   return {
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: { username: string 
 }
 
 export default async function UserRoast({ params }: { params: { username: string } }) {
-  const userData = await getUserData(params.username);
+  const userData = await getUserData(params.username.toLowerCase());
 
   if (!userData) {
     return <div className="bg-white text-center text-gray-500 p-8">User not found</div>;

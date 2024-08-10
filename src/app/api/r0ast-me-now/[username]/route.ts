@@ -106,7 +106,7 @@ const roastUserUsingAi = async (userData: User & { submissions: Submission[] }) 
   const prompt = `
   Generate a strong, harsh, realistic, and mind-blowing roast for the user with details given below.
   Give your reply in a JSON object with 3 properties: roastText, strengthsText, weaknessesText.
-  Make sure each property of the result (roast, strengths, weaknesses) is AT LEAST 4 paragraphs long, multiple lines and long roast is needed. Each paragraph should be in it's own <p> </p> tag, but all contained within the same string. Make sure you at least include 4 paragraphs or else I'll be fired from my job.
+  Make sure each property of the result (roast, strengths, weaknesses) is AT LEAST 3 paragraphs long, multiple lines and long roast is needed. Put some of the important words in <b> tags to highlight them. Make sure you at least include 4 paragraphs or else I'll be fired from my job. Each paragraph should be in it's own <p> </p> tag, but all contained within the same string.
   Make sure the roast is specific to the user and their posts and comments.
   User details:
   username: ${userData.username}
@@ -147,7 +147,7 @@ const roastUserUsingAi = async (userData: User & { submissions: Submission[] }) 
 }
 
 export async function GET(req: Request, { params }: { params: { username: string } }) {
-  const username = params.username;
+  const username = params.username.toLowerCase();
   const user = await fetchUser(username);
   if (!user) {
     return Response.json({ error: 'User not found' });

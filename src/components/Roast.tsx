@@ -150,6 +150,7 @@ export default function RoastClientSide({ username }: { username: string }) {
   const router = useRouter();
   const [userData, setUserData] = useState<UserData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  username = username.toLowerCase();
 
   useEffect(() => {
     fetchAndPollData(username, setUserData, setIsLoading);
