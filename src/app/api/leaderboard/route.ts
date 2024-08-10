@@ -1,11 +1,18 @@
 import prisma from '@/app/lib/prisma'
 
+export const revalidate = 60;
+
+const excludedUsernames = ["pg", "patio11", "tptacek"];
+
 export async function GET() {
   try {
     const recentUsers = await prisma.user.findMany({
       where: {
         roastText: {
           not: null
+        },
+        username: {
+          notIn: excludedUsernames
         }
       },
       orderBy: {
@@ -23,6 +30,9 @@ export async function GET() {
       where: {
         roastText: {
           not: null
+        },
+        username: {
+          notIn: excludedUsernames
         }
       },
       orderBy: {

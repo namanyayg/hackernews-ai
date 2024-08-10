@@ -15,8 +15,6 @@ interface LeaderboardData {
   top: LeaderboardEntry[];
 }
 
-const excludedUsernames = ["pg", "patio11", "tptacek"];
-
 export default function Leaderboard() {
   const [leaderboardData, setLeaderboardData] = useState<LeaderboardData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,14 +22,9 @@ export default function Leaderboard() {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response = await fetch('/api/leaderboard', { next: { revalidate: 300 } });
+        const response = await fetch('/api/leaderboard', { next: { revalidate: 60 } });
         const data = await response.json();
-        // Filter out excluded usernames
-        const filteredData = {
-          recent: data.recent.filter((entry: LeaderboardEntry) => !excludedUsernames.includes(entry.username)),
-          top: data.top.filter((entry: LeaderboardEntry) => !excludedUsernames.includes(entry.username))
-        };
-        setLeaderboardData(filteredData);
+        setLeaderboardData(data);
       } catch (error) {
         console.error('Error fetching leaderboard data:', error);
       } finally {
@@ -72,7 +65,7 @@ export default function Leaderboard() {
               </thead>
               <tbody>
                 {leaderboardData?.recent?.map((entry) => (
-                  <tr key={`recent-${entry.id}`} className="border-b border-orange-100">
+                  <tr key={`recent-${entry.username}`} className="border-b border-orange-100">
                     <td className="py-2">
                       <Link href={`/u/${entry.username}`} className="hover:text-orange-500 transition-colors">
                         {entry.username}
@@ -97,7 +90,7 @@ export default function Leaderboard() {
               </thead>
               <tbody>
                 {leaderboardData?.top?.map((entry) => (
-                  <tr key={`top-${entry.id}`} className="border-b border-orange-100">
+                  <tr key={`top-${entry.username}`} className="border-b border-orange-100">
                     <td className="py-2">
                       <Link href={`/u/${entry.username}`} className="hover:text-orange-500 transition-colors">
                         {entry.username}
