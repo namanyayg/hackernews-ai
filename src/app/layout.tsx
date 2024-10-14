@@ -40,8 +40,6 @@ export default function RootLayout({
               <h2 className="text-2xl font-semibold text-orange-600">Hi, I&rsquo;m nmn</h2>
             </a>
             <p className="text-lg mb-4">I&rsquo;m an indie developer and I&rsquo;ve been programming since the age of 13.</p>
-            <p className="text-lg mb-4">After ~10 years of consulting, I reached my <a href="https://x.com/NamanyayG/status/1786049433324462278" target="_blank" rel="noopener noreferrer" className="text-orange-600">FIRE goal</a> last year.</p>
-            <p className="text-lg mb-4">Since then, I&rsquo;ve been playing with AI for fun.</p>
             <p className="text-lg mb-8 italic">This is my dedication to HN for all it taught me over the years.</p>
             <p className="text-lg mb-4">I keep using AI in creative ways & <span className="font-bold">I would love to earn your follow</span>:</p>
             <a 
